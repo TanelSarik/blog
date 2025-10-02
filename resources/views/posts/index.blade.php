@@ -12,25 +12,27 @@
             <th>Updated</th>
             <th>Actions</th>
         </thead>
-        @foreach ($posts as $post)
-            <tr>
-                <td>{{ $post->id }}</td>
-                <td>{{ $post->title }}</td>
-                <td>{{ $post->Created_at }}</td>
-                <td>{{ $post->Updated_at }}</td>
-                <td>
-                    <div class="join">
-                        <a class="btn join-item btn-info">View</a>
-                        <a class="btn join-item btn-warning">Edit</a>
-                        <a class="btn join-item btn-error">Delete</a>
-                    </div>
-                </td>
-            </tr>
-        @endforeach
         <tbody>
-
+            @foreach($posts as $post)
+                <tr>
+                    <td>{{ $post->id }}</td>
+                    <td>{{ $post->title }}</td>
+                    <td>{{ $post->created_at }}</td>
+                    <td>{{ $post->updated_at }}</td>
+                    <td>
+                        <div class="join">
+                            <a href="{{ route('posts.show', ['post' => $post]) }}" class="btn join-item btn-info">View</a>
+                            <a href="{{ route('posts.edit', ['post' => $post]) }}" class="btn join-item btn-warning">Edit</a>
+                            <button type="submit" form="delete-form-{{$post->id}}" class="btn join-item btn-error">Delete</button>
+                        </div>
+                        <form id="delete-form-{{$post->id}}" action="{{ route('posts.destroy', ['post' => $post])}}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                        </form>
+                    </td>
+                </tr>
+            @endforeach
         </tbody>
     </table>
     {{ $posts->links() }}
-
 @endsection
