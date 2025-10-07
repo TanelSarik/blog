@@ -9,13 +9,15 @@
         class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
         <li><a href="{{ route('page1') }}">page 1</a></li>
       <li><a href="{{ route('page2') }}">Page 2</a></li>
-        <li>
+        @auth
+      <li>
           <a>Admin</a>
           <ul class="p-2">
             <li><a href="{{ route('posts.index') }}">Posts</a></li>
             <li><a>Submenu 2</a></li>
           </ul>
         </li>
+        @endauth
         <li><a>Item 3</a></li>
       </ul>
     </div>
@@ -25,6 +27,7 @@
     <ul class="menu menu-horizontal px-1">
       <li><a href="{{ route('page1') }}">page 1</a></li>
       <li><a href="{{ route('page2') }}">Page 2</a></li>
+      @auth
       <li>
         <details>
           <summary>Admin</summary>
@@ -34,11 +37,14 @@
           </ul>
         </details>
       </li>
+      @endauth
       <li><a>Item 3</a></li>
     </ul>
   </div>
+  @auth
   <div class="navbar-end gap-2">
     <a href="{{route('register')}}" class="btn btn-primary">Register</a>
     <a href="{{route('login')}}" class="btn btn-secondary">login</a>
   </div>
+   @endauth
 </div>
