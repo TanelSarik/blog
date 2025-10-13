@@ -24,7 +24,9 @@
                     <p class="text-neutral-content">{{ $post->user->name }}</p>
                     <p class="text-neutral-content">{{ $post->created_at->diffForHumans() }}</p>
                      <p class="text-neutral-content"><b>Comments:</b> {{ $post->comments_count }}</p>
+                     <p class="text-neutral-content"><b>Comments:</b> {{ $post->likes_count }}</p>
                     <div class="card-actions justify-end">
+                        <form action="{{route('post.like', ['post' => $post])}}"></form>
                         <a href="{{ route('post', ['post' => $post]) }}" class="btn btn-primary">Read more</a>
                     </div>
                 </div>
