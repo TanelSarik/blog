@@ -6,7 +6,7 @@ use App\Models\Like;
 use App\Http\Requests\StoreLikeRequest;
 use App\Http\Requests\UpdateLikeRequest;
 use App\Models\Post;
-use Illuminate\Container\Attributes\Auth;
+use Illuminate\Support\Facades\Auth;
 
 class LikeController extends Controller
 {
@@ -32,13 +32,13 @@ class LikeController extends Controller
     public function store(StoreLikeRequest $request, Post $post)
     {
         $like = Auth::user()->likes()->where('post_id', $post->id)->first();
-        if() {
-
+        if($like) {
+            $like->delete();
         } else {
-        $like = new Like();
-        $like->post()->associate($post);
-        $like->user()->associate(Auth::user());
-        $like->save();
+            $like = new Like();
+            $like->post()->associate($post);
+            $like->user()->associate(Auth::user());
+            $like->save();
         }
 
         return redirect()->back();

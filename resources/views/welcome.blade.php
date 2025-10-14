@@ -26,7 +26,14 @@
                      <p class="text-neutral-content"><b>Comments:</b> {{ $post->comments_count }}</p>
                      <p class="text-neutral-content"><b>Comments:</b> {{ $post->likes_count }}</p>
                     <div class="card-actions justify-end">
-                        <form action="{{route('post.like', ['post' => $post])}}"></form>
+                         <form action="{{route('post.like', ['post' => $post])}}" method="POST">
+                            @csrf
+                            @if($post->authHasLiked)
+                                <button class="btn btn-error">Unlike</button>
+                            @else
+                                <button class="btn btn-secondary">Like</button>
+                            @endif
+                        </form>
                         <a href="{{ route('post', ['post' => $post]) }}" class="btn btn-primary">Read more</a>
                     </div>
                 </div>
