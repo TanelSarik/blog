@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class PublicController extends Controller
 {
     public function index() {
-       $posts = Post::with('images', 'user')->withCount('comments', 'likes')->latest()->simplePaginate(16);
+       $posts = Post::with('images', 'user', 'tags')->withCount('comments', 'likes')->latest()->simplePaginate(16);
         return view('welcome', compact('posts'));
     }
 
@@ -22,5 +23,10 @@ class PublicController extends Controller
     }
     public function page2() {
         return view('page2');
+    }
+
+    public function tag(Tag $tag) {
+        $posts = $tag->posts()->with('images', 'user', 'tags')->withCount('comments', 'likes')->latest()->simplePaginate(16);
+        return view('welcome', compact('posts'));
     }
 }

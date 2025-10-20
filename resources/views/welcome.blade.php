@@ -25,7 +25,14 @@
                     <p class="text-neutral-content">{{ $post->created_at->diffForHumans() }}</p>
                      <p class="text-neutral-content"><b>Comments:</b> {{ $post->comments_count }}</p>
                      <p class="text-neutral-content"><b>Comments:</b> {{ $post->likes_count }}</p>
-                    <div class="card-actions justify-end">
+                     <div class="flex flex-wrap gap-1">
+                        @foreach($post->tags as $tag)
+                            <a href="{{route('tag', ['tag' => $tag])}}">
+                                <div class="badge badge-primary">{{$tag->name}}</div>
+                            </a>
+                        @endforeach
+                    </div>
+                     <div class="card-actions justify-end">
                          <form action="{{route('post.like', ['post' => $post])}}" method="POST">
                             @csrf
                             @if($post->authHasLiked)
