@@ -26,7 +26,8 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
+
     Route::resource('/admin/posts', PostController::class);
 
     Route::post('/post/{post}/like', [LikeController::class, 'store'])->name('post.like');
