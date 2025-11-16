@@ -23,8 +23,8 @@
                     <p>{{ $post->snippet }}</p>
                     <p class="text-neutral-content">{{ $post->user->name }}</p>
                     <p class="text-neutral-content">{{ $post->created_at->diffForHumans() }}</p>
-                     <p class="text-neutral-content"><b>Comments:</b> {{ $post->comments_count }}</p>
-                     <p class="text-neutral-content"><b>Comments:</b> {{ $post->likes_count }}</p>
+                     <p class="text-neutral-content"><b>{{__('Comments')}}:</b> {{ $post->comments_count }}</p>
+                    <p class="text-neutral-content"><b>@lang('Likes'):</b> {{ $post->likes_count }}</p>
                       <div class="text-neutral-content flex gap-3">
                         <b>Category:</b>
                         <a href="{{route('category', ['category' => $post->category])}}">

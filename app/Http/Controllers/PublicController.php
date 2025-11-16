@@ -16,6 +16,9 @@ class PublicController extends Controller
     }
 
     public function post(Post $post){
+        if(request()->wantsJson()) {
+            return $post->load(['images', 'user']);
+        }
         return view('post', compact('post'));
     }
 
