@@ -1,6 +1,10 @@
 @extends('partials.layout')
 @section('title', 'Dashboard page')
 @section('content')
+@if(isset($userProfile))
+    <h1 class="text-3xl font-bold mb-4">{{ $userProfile->name }}'s Posts</h1>
+@endif
+
     {{ $posts->links() }}
     <div class="grid  grid-cols-4 gap-2">
         @foreach ($posts as $post)

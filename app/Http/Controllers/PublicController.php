@@ -38,4 +38,16 @@ class PublicController extends Controller
         $posts = $category->posts()->with('images', 'user', 'tags')->withCount('comments', 'likes')->latest()->simplePaginate(16);
         return view('welcome', compact('posts'));
     }
+    public function user(\App\Models\User $user)
+{
+    $posts = $user->posts()
+        ->with('images', 'user', 'tags')
+        ->withCount('comments', 'likes')
+        ->latest()
+        ->simplePaginate(16);
+
+    return view('welcome', compact('posts', 'user'));
+}
+
+
 }
